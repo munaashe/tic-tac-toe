@@ -1,9 +1,16 @@
 import Image from 'next/image'
+import Board from './Board'
+import Scores from './Scores'
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      Here We go  Again
+    <main className="p-12 grid grid-cols-3 gap-4">
+      <div className='col-span-2'>
+        <Board />
+      </div>
+      <div>
+        <Scores />
+      </div>
     </main>
   )
 }
