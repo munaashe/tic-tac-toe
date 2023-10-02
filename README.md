@@ -1,66 +1,65 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Tic Tac Toe Game
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is a Tic Tac Toe game project that includes both the backend and the frontend components. The purpose of this README is to explain the choices made for the project and provide instructions for running the submission.
 
-## About Laravel
+## AI Foe Placement
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+To enhance the play experience and optimize performance, the AI foe logic has been implemented on the frontend using Next.js. By doing so, we minimize API calls and reduce latency, resulting in a faster and more responsive user interface.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Technology Selection
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Next.js has been chosen as the frontend framework for this project due to its enhanced security and better performance. Next.js provides server-side rendering capabilities, which improve the initial page load time and overall user experience. Additionally, it offers built-in features like automatic code splitting and prefetching, resulting in optimized performance.
 
-## Learning Laravel
+## Deployment and CI/CD
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+To ensure scalability and streamline the development process, a CI/CD (Continuous Integration/Continuous Deployment) pipeline will be implemented. This pipeline will automate the deployment process, allowing for seamless updates to both the backend and frontend components as the project evolves.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Running the Submission
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+To run the submission locally, please follow these steps:
 
-## Laravel Sponsors
+1. Clone the repository to your local machine:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```bash
+git clone <repository_url>
+```
 
-### Premium Partners
+2. Navigate to the project's root directory:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+```bash
+cd tic-tac-toe
+```
 
-## Contributing
+3. Start the Laravel backend by running the following command:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+php artisan serve
+```
+This will start the backend server at http://localhost:8000.
 
-## Code of Conduct
+4. Open a new terminal window and navigate to the frontend directory:
+```bash
+cd frontend
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+5. Install the necessary dependencies by running:
+```bash
+npm install
+or
+yarn install
+```
 
-## Security Vulnerabilities
+6. Once the dependencies are installed, start the Next.js development server:
+```bash
+npm run dev
+or
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+yarn dev
+```
+The frontend will now be accessible at http://localhost:3000, and you can start playing the Tic Tac Toe game!
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Additional Notes
+- Make sure you have PHP and Node.js installed on your machine before running the submission.
+- Modify any configuration files (such as database settings) as needed before running the backend server.
+- Ensure that the backend server is running before starting the frontend development server.
