@@ -21,7 +21,7 @@ To run the submission locally, please follow these steps:
 1. Clone the repository to your local machine:
 
 ```bash
-git clone <repository_url>
+git clone https://github.com/munaashe/tic-tac-toe.git
 ```
 
 2. Navigate to the project's root directory:
