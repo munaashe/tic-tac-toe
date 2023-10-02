@@ -22,13 +22,64 @@ const Board = () => {
     const [board, setBoard] = useState(Array(9).fill(EMPTY_CELL));
     const [currentPlayer, setCurrentPlayer] = useState(PLAYER_X);
     const [winner, setWinner] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+    const [score, setScore] = useState(0);
+    const [playerName, setPlayerName] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if (winner) {
-            alert(`Player ${winner} wins!`);
-            resetGame();
+            handleGameOver();
         }
     }, [winner]);
+
+    const handleGameOver = () => {
+        setShowModal(true);
+        if (winner === PLAYER_X) {
+            setScore(board.filter(cell => cell === EMPTY_CELL).length);
+        } else if (winner === 'draw') {
+            setScore(0);
+        } else {
+            setScore(null);
+        }
+    };
+
+    const handlePlayAgain = () => {
+        setShowModal(false);
+        resetGame();
+    };
+
+    const handlePlayerNameChange = (event) => {
+        setPlayerName(event.target.value);
+    };
+
+    const handleSubmit = () => {
+        setIsLoading(true)
+        const newScore = {
+            name: playerName,
+            score: score,
+        };
+
+        fetch(process.env.NEXT_PUBLIC_BASE_URL + '/scores', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newScore),
+        })
+            .then(data => {
+                console.log('Score submitted successfully:', data);
+                setIsLoading(false);
+                setShowModal(false);
+                resetGame();
+            })
+            .catch(error => {
+                console.error('Error submitting score:', error);
+                setIsLoading(false);
+                setShowModal(false);
+                resetGame();
+            });
+    };
 
     useEffect(() => {
         if (currentPlayer === PLAYER_O) {
@@ -179,9 +230,7 @@ const Board = () => {
 
     return (
         <div className="w-96 mx-auto flex flex-col justify-center items-center">
-            <div className='text-[24px] font-semibold pb-4'>
-                Tic Tac Toe Game
-            </div>
+            <div className="text-[24px] font-semibold pb-4">Tic Tac Toe Game</div>
             <div className="grid grid-cols-3 gap-2">
                 {board.map((cell, index) => (
                     <button
@@ -194,14 +243,65 @@ const Board = () => {
                     </button>
                 ))}
             </div>
-            <button
-                className="mt-4 px-6 py-3 bg-blue-500 hover:bg-purple-800 text-white font-bold text-center rounded-xl"
-                onClick={resetGame}
-            >
-                Reset Game
-            </button>
+            {showModal && (
+                <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+                    <div className="bg-white p-8 rounded-lg flex flex-col justify-center items-center">
+                        {winner === PLAYER_O && (
+                            <>
+                                <div className="text-2xl font-semibold mb-4">Game Over, sorry you lost.</div>
+                                <button
+                                    className="px-6 py-3 bg-blue-500 hover:bg-purple-800 text-white font-bold text-center rounded-xl"
+                                    onClick={handlePlayAgain}
+                                >
+                                    Play Again
+                                </button>
+                            </>
+                        )}
+                        {winner === PLAYER_X && (
+                            <>
+                                <div className="text-2xl font-semibold mb-4">Good going! What's your name?</div>
+
+                                {isLoading ? (
+                                    <div className="flex items-center justify-center py-8">
+                                        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-900"></div>
+                                    </div>
+                                ) : (
+                                    <>
+                                        <input
+                                            type="text"
+                                            className="border border-gray-300 p-2 mb-4"
+                                            placeholder="Enter your name"
+                                            value={playerName}
+                                            onChange={handlePlayerNameChange}
+                                        />
+                                        <button
+                                            className="px-6 py-3 bg-blue-500 hover:bg-purple-800 text-white font-bold text-center rounded-xl"
+                                            onClick={handleSubmit}
+                                        >
+                                            Submit
+                                        </button>
+                                    </>
+                                )}
+
+                            </>
+                        )}
+                        {winner === 'draw' && (
+                            <>
+                                <div className="text-2xl font-semibold mb-4">Game Over, Match drawn.</div>
+                                <button
+                                    className="px-6 py-3 bg-blue-500 hover:bg-purple-800 text-white font-bold text-center rounded-xl"
+                                    onClick={handlePlayAgain}
+                                >
+                                    Play Again
+                                </button>
+                            </>
+                        )}
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
 
 export default Board;
+
